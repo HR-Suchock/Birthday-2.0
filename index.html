@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div id="balloons" class="balloons"></div>
+  <span class="deco d1">✨</span><span class="deco d2">🎀</span><span class="deco d3">⭐</span><span class="deco d4">🧁</span><span class="deco d5">💖</span>
+
+  <!-- Screen 1: tap to open (needed so the browser allows music) -->
+  <section id="gate" class="gate">
+    <div class="card gate-card">
+      <p class="small">a little surprise for</p>
+      <h1 id="gateName"></h1>
+      <button id="openBtn" class="btn">Open your surprise 🎁</button>
+    </div>
+  </section>
+
+  <!-- Screen 2: cake -->
+  <main id="scene" class="scene hidden">
+    <h2 id="title" class="title"></h2>
+
+    <div class="cake" id="cake" aria-hidden="true">
+      <svg class="cake-svg" viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="stripe" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="#fff"/><rect width="4" height="8" fill="#ffb3d5"/>
+          </pattern>
+        </defs>
+        <!-- plate -->
+        <ellipse cx="150" cy="270" rx="136" ry="15" fill="#fff"/>
+        <ellipse cx="150" cy="266" rx="124" ry="11" fill="#f3e9ff"/>
+        <!-- bottom tier -->
+        <rect x="38" y="190" width="224" height="78" rx="24" fill="#ff7eb6"/>
+        <rect x="38" y="190" width="224" height="26" rx="13" fill="#fff"/>
+        <g fill="#fff"><circle cx="62" cy="214" r="12"/><circle cx="96" cy="216" r="12"/><circle cx="130" cy="214" r="12"/><circle cx="164" cy="217" r="12"/><circle cx="198" cy="214" r="12"/><circle cx="234" cy="216" r="12"/></g>
+        <g fill="#ffe27a"><circle cx="70" cy="242" r="3.5"/><circle cx="108" cy="256" r="3.5"/><circle cx="196" cy="254" r="3.5"/><circle cx="234" cy="240" r="3.5"/></g>
+        <g fill="#7cc8ff"><circle cx="88" cy="250" r="3"/><circle cx="214" cy="244" r="3"/></g>
+        <!-- kawaii face -->
+        <circle cx="122" cy="236" r="4.5" fill="#4a3563"/><circle cx="178" cy="236" r="4.5" fill="#4a3563"/>
+        <ellipse cx="106" cy="246" rx="9" ry="5.5" fill="#e4559a" opacity=".45"/><ellipse cx="194" cy="246" rx="9" ry="5.5" fill="#e4559a" opacity=".45"/>
+        <path d="M140 242 q10 11 20 0" stroke="#4a3563" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <!-- middle tier -->
+        <rect x="68" y="124" width="164" height="72" rx="22" fill="#b79cff"/>
+        <rect x="68" y="124" width="164" height="24" rx="12" fill="#fff"/>
+        <g fill="#fff"><circle cx="88" cy="146" r="11"/><circle cx="118" cy="148" r="11"/><circle cx="150" cy="146" r="11"/><circle cx="182" cy="148" r="11"/><circle cx="212" cy="146" r="11"/></g>
+        <g fill="#fff" opacity=".85"><circle cx="100" cy="176" r="3.5"/><circle cx="150" cy="182" r="3.5"/><circle cx="200" cy="176" r="3.5"/></g>
+        <!-- top tier -->
+        <rect x="100" y="70" width="100" height="60" rx="20" fill="#7cc8ff"/>
+        <rect x="100" y="70" width="100" height="22" rx="11" fill="#fff"/>
+        <g fill="#fff"><circle cx="116" cy="90" r="10"/><circle cx="142" cy="92" r="10"/><circle cx="168" cy="90" r="10"/><circle cx="188" cy="91" r="9"/></g>
+        <!-- candles + flames -->
+        <g>
+          <rect x="121" y="36" width="9" height="36" rx="4" fill="url(#stripe)"/>
+          <rect x="146" y="30" width="9" height="42" rx="4" fill="url(#stripe)"/>
+          <rect x="171" y="36" width="9" height="36" rx="4" fill="url(#stripe)"/>
+        </g>
+        <g class="flames">
+          <ellipse class="flame" cx="125.5" cy="26" rx="6" ry="10" fill="#ffd45e"/>
+          <ellipse class="flame" cx="150.5" cy="20" rx="6" ry="10" fill="#ffd45e"/>
+          <ellipse class="flame" cx="175.5" cy="26" rx="6" ry="10" fill="#ffd45e"/>
+        </g>
+      </svg>
+    </div>
+
+    <p id="hint" class="hint">Make a wish and blow out the candles 🕯️</p>
+    <button id="blowBtn" class="btn">Blow out the candles</button>
+
+    <!-- Screen 3: wishes (revealed after candles are out) -->
+    <section id="wish" class="wish hidden">
+      <div class="card">
+        <h2 id="wishHeadline"></h2>
+        <p id="wishText"></p>
+        <ul id="messages" class="messages"></ul>
+        <div id="photos" class="photos"></div>
+        <p id="signature" class="sig"></p>
+      </div>
+
+      <form id="wishForm" class="card wish-form">
+        <label for="wishInput">Now it's your turn. Write your birthday wish 💌</label>
+        <textarea id="wishInput" maxlength="500" rows="4" placeholder="I wish..." required></textarea>
+        <div class="row">
+          <span id="count">0/500</span>
+          <button id="sendBtn" class="btn" type="submit">Send It to the Stars ✨</button>
+        </div>
+        <p id="wishStatus" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- End page (shown after the wish is sent) -->
+  <section id="endPage" class="end hidden">
+    <div class="card end-card">
+      <div class="end-emoji">💌</div>
+      <h2 id="endTitle"></h2>
+      <p id="endText"></p>
+      <p id="endSig" class="sig"></p>
+      <button id="replayBtn" class="btn">Watch again 🎂</button>
+    </div>
+  </section>
+
+  <button id="muteBtn" class="mute hidden" aria-label="Mute or unmute music">♪</button>
+
+  <!-- Firebase (compat build works even when opening index.html directly) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+  <script src="js/config.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/wish.js"></script>
+</body>
+</html>
