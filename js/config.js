@@ -2,8 +2,8 @@
 const CONFIG = {
   name: "Jahin",
   from: "Suchock",                        // shown as the signature
-  title: "Happy Birthday, Jahin !",        // typed out on the cake screen
-  wishHeadline: "Make it a great year !",
+  title: "Happy Birthday, Jahin!",        // typed out on the cake screen
+  wishHeadline: "Make it a great year!",
   wishText: "Another year older, and somehow even more awesome. Thanks for all the laughs and good times we’ve shared. I hope your birthday is filled with lots of cake, endless fun and everything you’ve wished for. Here’s to another amazing year ahead!",
 
   // End page (shown after she sends her wish)
@@ -25,7 +25,7 @@ const CONFIG = {
   // Music: leave "" to use the built-in Happy Birthday tune.
   // Or drop an mp3 in assets/audio/ and set e.g. "assets/audio/birthday.mp3"
   musicFile: "",
-  volume: 0.5,                            // 0 to 1
+  volume: 0.8,                            // 0 to 1
 
   confettiColors: ["#ff7eb6", "#b79cff", "#7cc8ff", "#ffe27a", "#ffffff"]
 };
