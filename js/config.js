@@ -25,7 +25,7 @@ const CONFIG = {
   // Music: leave "" to use the built-in Happy Birthday tune.
   // Or drop an mp3 in assets/audio/ and set e.g. "assets/audio/birthday.mp3"
   musicFile: "",
-  volume: 0.8,                            // 0 to 1
+  volume: 1,                            // 0 to 1
 
   confettiColors: ["#ff7eb6", "#b79cff", "#7cc8ff", "#ffe27a", "#ffffff"]
 };
